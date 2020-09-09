@@ -10,7 +10,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Properties", "Properties", 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Flavedo.Zest.Samples", "Samples\Flavedo.Zest.Samples\Flavedo.Zest.Samples.fsproj", "{ABF62F70-6DB4-4EF0-ADBA-EDDB44ED17C2}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Flavedo.Zest.Samples", "Samples\Flavedo.Zest.Samples\Flavedo.Zest.Samples.fsproj", "{ABF62F70-6DB4-4EF0-ADBA-EDDB44ED17C2}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Flavedo", "Flavedo\Flavedo.fsproj", "{490ABFC4-B42C-4651-B2E5-2D231B592F9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +28,10 @@ Global
 		{ABF62F70-6DB4-4EF0-ADBA-EDDB44ED17C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABF62F70-6DB4-4EF0-ADBA-EDDB44ED17C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABF62F70-6DB4-4EF0-ADBA-EDDB44ED17C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{490ABFC4-B42C-4651-B2E5-2D231B592F9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{490ABFC4-B42C-4651-B2E5-2D231B592F9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{490ABFC4-B42C-4651-B2E5-2D231B592F9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{490ABFC4-B42C-4651-B2E5-2D231B592F9A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

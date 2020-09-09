@@ -1,20 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <WarningLevel>5</WarningLevel>
-    <OutputPath>../build/release</OutputPath>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>../build/debug</OutputPath>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Include="Task.fs" />
-  </ItemGroup>
-
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
+    <PropertyGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|AnyCPU&apos;">
+        <WarningLevel>5</WarningLevel>
+        <OutputPath>../build/release</OutputPath>
+    </PropertyGroup>
+    <PropertyGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|AnyCPU&apos;">
+        <OutputPath>../build/debug</OutputPath>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="Task.fs"/>
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Flavedo\Flavedo.fsproj"/>
+    </ItemGroup>
 </Project>
