@@ -5,6 +5,14 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|AnyCPU&apos;">
+      <WarningLevel>5</WarningLevel>
+      <OutputPath>../../build/samples/release</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|AnyCPU&apos;">
+      <OutputPath>../../build/samples/debug</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Include="Program.fs" />
   </ItemGroup>

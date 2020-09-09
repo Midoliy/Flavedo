@@ -4,10 +4,10 @@ open System
 open System.Threading
 open System.Threading.Tasks
 
-type internal NTask<'T> = System.Threading.Tasks.Task<'T>
-type internal NTask = System.Threading.Tasks.Task
-type internal VTask<'T> = System.Threading.Tasks.ValueTask<'T>
-type internal VTask = System.Threading.Tasks.ValueTask
+type internal NTask<'T> = Task<'T>
+type internal NTask = Task
+type internal VTask<'T> = ValueTask<'T>
+type internal VTask = ValueTask
 
 [<AbstractClass; Sealed>]
 type Task private() =
@@ -185,3 +185,6 @@ type Task private() =
         let tasks = [| Task.unwrap task1; Task.unwrap task2; Task.unwrap task3; Task.unwrap task4; Task.unwrap task5; Task.unwrap task6; Task.unwrap task7; Task.unwrap task8; Task.unwrap task9; |]
         Task.waitAll(tasks, token)
         (task1.Result, task2.Result, task3.Result, task4.Result, task5.Result, task6.Result, task7.Result, task8.Result, task9.Result)
+
+    static member await<'T> (task:Async<'T>) =
+        task |> Async.StartAsTask |> Task.await
