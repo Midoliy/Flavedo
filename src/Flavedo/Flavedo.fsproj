@@ -2,6 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.0.1</Version>
+    <Copyright>midoliy</Copyright>
+    <PackageProjectUrl>https://github.com/Midoliy/Flavedo/tree/master</PackageProjectUrl>
+    <PackageIcon>orange.png</PackageIcon>
+    <RepositoryUrl>https://github.com/Midoliy/Flavedo/tree/master</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageTags>midoliy,Flavedo,Core</PackageTags>
+    <NeutralLanguage>ja-JP</NeutralLanguage>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Authors>midoliy</Authors>
+    <Company>midoliy</Company>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -16,6 +28,13 @@
 
   <ItemGroup>
     <Compile Include="Core.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\Assets\orange.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
