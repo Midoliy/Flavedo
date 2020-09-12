@@ -7,7 +7,9 @@
 
 ### Task.await
 
-以下のような C# コードをほぼそのままの形で移植することが可能です。
+非同期処理を同期処理のように記述することが可能です。  
+これは `C#` の `await` と対応しています。
+
 ```cs
 // C#
 using System;
@@ -59,4 +61,106 @@ let task2 = reader2.ReadToEndAsync()
 let (content1, content2) = Task.await (task1, task2)
 // 方法2
 let (content1, content2) = Task.await (reader1.ReadToEndAsync(), reader2.ReadToEndAsync())
+```
+
+---  
+
+### Task.run
+
+同期的処理を非同期処理として実行することが可能です。  
+これは `C#` の `Task.Run()` と対応しています。
+
+```cs
+// C#
+using System;
+using System.Threading.Tasks;
+
+namespace Sample
+{
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            await Task.Run(() =>
+            {
+                for (var i = 0; i < 10; i++)
+                    Console.WriteLine($"i = {i}");
+            });
+        }
+    }
+}
+```
+
+```fsharp
+// F#
+open Flavedo.Zest
+
+Task.await (Task.run(fun () ->
+    for i in 0..9 do
+        printfn "i = %d" i ))
+```
+
+また、戻り値がある関数にも対応しています。
+
+```cs
+// C#
+using System;
+using System.Threading.Tasks;
+
+namespace Sample
+{
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            var result = await Task.Run(() =>
+            {
+                // do something
+                return "result";
+            });
+        }
+    }
+}
+```
+
+```fsharp
+// F#
+open Flavedo.Zest
+
+let result = Task.await (Task.run(fun () ->
+    // do something
+    "result" ))
+```
+
+---  
+
+### Task.delay
+
+処理を一定時間遅延させたい場合に利用します。  
+これは `C#` の `Task.Delay()` と対応しています。
+
+```cs
+// C#
+using System;
+using System.Threading.Tasks;
+
+namespace Sample
+{
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            await Task.Delay(1_000); // 1秒遅延
+            Console.WriteLine("Hello, World!!");
+        }
+    }
+}
+```
+
+```fsharp
+// F#
+open Flavedo.Zest
+
+Task.await (Task.delay(1_000<millisec>)) // 1秒遅延
+printfn "Hello, World!!"
 ```
