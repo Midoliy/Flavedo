@@ -38,10 +38,38 @@ open System.IO
 [<Literal>]
 let path = "./sample.txt"
 let reader = new StreamReader(path)
-let content = Task.await (reader.ReadToEndAsync())
+let content = Task.await reader.ReadToEndAsync ()
 ```
 
-また、複数の非同期タスクを待機する場合は以下のように記述可能です。
+また、`ValueTask` については `Task.awaitv()` で待機可能です。
+
+```fsharp
+// F#
+open Flavedo.Zest
+
+let result = Task.awaitv SampleAsync ()
+```
+
+---
+
+### Task.waitAll
+
+複数の非同期タスクがすべて完了するまで待機することが可能です。
+これは `C#` の `Task.WaitAll()` と対応しています。
+
+```fsharp
+// F#
+open Flavedo.Zest
+
+// 方法1
+let task1 () = Task.delay 1000<millisec>
+let task2 () = Task.delay 1500<millisec>
+Task.waitAll (task1, task2) |> ignore
+// 方法2
+Task.waitAll (Task.delay 1000<millisec>, Task.delay 1500<millisec>) |> ignore
+```
+
+また `C#` の `Task.WhenAll()` についても `Task.waitAll()` で実現可能です。
 
 ```fsharp
 // F#
@@ -58,9 +86,28 @@ let reader2 = new StreamReader(path2)
 // 方法1
 let task1 = reader1.ReadToEndAsync()
 let task2 = reader2.ReadToEndAsync()
-let (content1, content2) = Task.await (task1, task2)
+let (content1, content2) = Task.waitAll (task1, task2)
 // 方法2
-let (content1, content2) = Task.await (reader1.ReadToEndAsync(), reader2.ReadToEndAsync())
+let (content1, content2) = Task.waitAll (reader1.ReadToEndAsync(), reader2.ReadToEndAsync())
+```
+
+---
+
+### Task.waitAny
+
+複数の非同期タスクのいずれかが完了するのを待機することが可能です。
+これは `C#` の `Task.WaitAny()` と対応しています。
+
+```fsharp
+// F#
+open Flavedo.Zest
+
+// 方法1
+let task1 () = Task.delay 1000<millisec>
+let task2 () = Task.delay 1500<millisec>
+Task.waitAny (task1, task2) |> ignore
+// 方法2
+Task.waitAny (Task.delay 1000<millisec>, Task.delay 1500<millisec>) |> ignore
 ```
 
 ---  
@@ -95,7 +142,7 @@ namespace Sample
 // F#
 open Flavedo.Zest
 
-Task.await (Task.run(fun () ->
+Task.await Task.run (fun () ->
     for i in 0..9 do
         printfn "i = %d" i ))
 ```
@@ -127,9 +174,9 @@ namespace Sample
 // F#
 open Flavedo.Zest
 
-let result = Task.await (Task.run(fun () ->
+let result = Task.await Task.run (fun () ->
     // do something
-    "result" ))
+    "result" )
 ```
 
 ---  
@@ -161,6 +208,6 @@ namespace Sample
 // F#
 open Flavedo.Zest
 
-Task.await (Task.delay(1_000<millisec>)) // 1秒遅延
+Task.await Task.delay 1_000<millisec> // 1秒遅延
 printfn "Hello, World!!"
 ```
