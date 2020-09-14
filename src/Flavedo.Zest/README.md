@@ -2,13 +2,13 @@
 
 ## Task module
 
-`Task` は `C#` での `await` をサポートするための関数を提供しています。
-また、`System.Threading.Tasks.Taskクラス` の一部のメソッドにも対応しています。
+`Task` は `C#` での `await` をサポートするための関数を提供しています。  
+また、`System.Threading.Tasks.Taskクラス` の一部のメソッドにも対応しています。  
 
 ### Task.await
 
 非同期処理を同期処理のように記述することが可能です。  
-これは `C#` の `await` と対応しています。
+これは `C#` の `await` と対応しています。  
 
 ```cs
 // C#
@@ -41,7 +41,7 @@ let reader = new StreamReader(path)
 let content = Task.await reader.ReadToEndAsync ()
 ```
 
-また、`ValueTask` については `Task.awaitv()` で待機可能です。
+また、`ValueTask` については `Task.awaitv()` で待機可能です。  
 
 ```fsharp
 // F#
@@ -54,8 +54,8 @@ let result = Task.awaitv SampleAsync ()
 
 ### Task.waitAll
 
-複数の非同期タスクがすべて完了するまで待機することが可能です。
-これは `C#` の `Task.WaitAll()` と対応しています。
+複数の非同期タスクがすべて完了するまで待機することが可能です。  
+これは `C#` の `Task.WaitAll()` と対応しています。  
 
 ```fsharp
 // F#
@@ -69,7 +69,7 @@ Task.waitAll (task1, task2) |> ignore
 Task.waitAll (Task.delay 1000<millisec>, Task.delay 1500<millisec>) |> ignore
 ```
 
-また `C#` の `Task.WhenAll()` についても `Task.waitAll()` で実現可能です。
+また `C#` の `Task.WhenAll()` についても `Task.waitAll()` で実現可能です。  
 
 ```fsharp
 // F#
@@ -95,8 +95,8 @@ let (content1, content2) = Task.waitAll (reader1.ReadToEndAsync(), reader2.ReadT
 
 ### Task.waitAny
 
-複数の非同期タスクのいずれかが完了するのを待機することが可能です。
-これは `C#` の `Task.WaitAny()` と対応しています。
+複数の非同期タスクのいずれかが完了するのを待機することが可能です。  
+これは `C#` の `Task.WaitAny()` と対応しています。  
 
 ```fsharp
 // F#
@@ -115,7 +115,7 @@ Task.waitAny (Task.delay 1000<millisec>, Task.delay 1500<millisec>) |> ignore
 ### Task.run
 
 同期的処理を非同期処理として実行することが可能です。  
-これは `C#` の `Task.Run()` と対応しています。
+これは `C#` の `Task.Run()` と対応しています。  
 
 ```cs
 // C#
@@ -147,7 +147,7 @@ Task.await Task.run (fun () ->
         printfn "i = %d" i ))
 ```
 
-また、戻り値がある関数にも対応しています。
+また、戻り値がある関数にも対応しています。  
 
 ```cs
 // C#
@@ -184,7 +184,7 @@ let result = Task.await Task.run (fun () ->
 ### Task.delay
 
 処理を一定時間遅延させたい場合に利用します。  
-これは `C#` の `Task.Delay()` と対応しています。
+これは `C#` の `Task.Delay()` と対応しています。  
 
 ```cs
 // C#
