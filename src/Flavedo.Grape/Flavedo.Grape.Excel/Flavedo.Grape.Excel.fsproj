@@ -1,4 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
     <PropertyGroup>
         <TargetFrameworks>netcoreapp3.1;net5.0</TargetFrameworks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -9,28 +10,28 @@
         <PackageProjectUrl>https://github.com/Midoliy/Flavedo/tree/master</PackageProjectUrl>
         <RepositoryUrl>https://github.com/Midoliy/Flavedo/tree/master</RepositoryUrl>
         <RepositoryType>GitHub</RepositoryType>
-        <PackageTags>midoliy,Flavedo,Zest</PackageTags>
+        <PackageTags>midoliy,Flavedo,Grape,Excel</PackageTags>
         <NeutralLanguage>ja-JP</NeutralLanguage>
-        <Version>0.0.2</Version>
-        <PackageIcon>lemon.png</PackageIcon>
+        <Version>0.0.1</Version>
+        <PackageIcon>grape.png</PackageIcon>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
         <WarningLevel>5</WarningLevel>
-        <OutputPath>../build/release</OutputPath>
+        <OutputPath>../../build/release</OutputPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-        <OutputPath>../build/debug</OutputPath>
+        <OutputPath>../../build/debug</OutputPath>
     </PropertyGroup>
+
     <ItemGroup>
-        <Compile Include="Task.fs" />
+        <None Include="..\..\Assets\grape.png">
+            <Pack>True</Pack>
+            <PackagePath></PackagePath>
+        </None>
     </ItemGroup>
+
     <ItemGroup>
-        <ProjectReference Include="..\Flavedo\Flavedo.fsproj" />
+      <PackageReference Include="DocumentFormat.OpenXml" Version="2.11.3" />
     </ItemGroup>
-    <ItemGroup>
-      <None Include="..\Assets\lemon.png">
-        <Pack>True</Pack>
-        <PackagePath></PackagePath>
-      </None>
-    </ItemGroup>
+
 </Project>

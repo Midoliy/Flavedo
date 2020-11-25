@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFrameworks>netcoreapp3.1;net5.0</TargetFrameworks>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <WarningLevel>5</WarningLevel>
+        <OutputPath>../../build/samples/release</OutputPath>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <OutputPath>../../build/samples/debug</OutputPath>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="Program.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Flavedo.Grape\Flavedo.Grape.Excel\Flavedo.Grape.Excel.fsproj" />
+    </ItemGroup>
+
+</Project>
