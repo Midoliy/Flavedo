@@ -22,6 +22,11 @@
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
         <OutputPath>../../build/debug</OutputPath>
     </PropertyGroup>
+    <ItemGroup>
+      <Compile Include="Excel.fs" />
+      <Compile Include="ExcelDocument.fs" />
+      <Compile Include="ExcelBuilder.fs" />
+    </ItemGroup>
 
     <ItemGroup>
         <None Include="..\..\Assets\grape.png">
