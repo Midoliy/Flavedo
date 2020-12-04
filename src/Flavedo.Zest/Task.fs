@@ -9,8 +9,33 @@ type internal NTask = Task
 type internal VTask<'T> = ValueTask<'T>
 type internal VTask = ValueTask
 
+module ValueTask =
+    let private as_task (fn: 'T -> ValueTask<'U>) (x: 'T) =
+        let task = fn x
+        task.AsTask()
+
+    let await fn x =
+        let task = as_task fn x
+        Async.AwaitTask task
+
+module Task =
+    let await fn x =
+        Async.AwaitTask (fn x)
+
 [<AbstractClass; Sealed>]
 type Task private() =
+    static member private as_task (value_task: ValueTask<'U>) =
+        value_task.AsTask()
+
+    static member await async =
+        Async.AwaitTask async
+        
+    static member await (task:ValueTask) =
+        Async.AwaitTask (task.AsTask())
+
+    static member await (task:ValueTask<'T>) =
+        Async.AwaitTask (task.AsTask())
+
     static member internal unwrap (task:NTask<'T>) =
         task :> NTask
 
@@ -312,13 +337,3 @@ type Task private() =
     static member waitAny<'T1, 'T2, 'T3, 'T4, 'T5, 'T6, 'T7, 'T8, 'T9> (task1:VTask<'T1>, task2:VTask<'T2>, task3:VTask<'T3>, task4:VTask<'T4>, task5:VTask<'T5>, task6:VTask<'T6>, task7:VTask<'T7>, task8:VTask<'T8>, task9:VTask<'T9>, ?token:CancellationToken) =
         let tasks = [| Task.unwrap task1; Task.unwrap task2; Task.unwrap task3; Task.unwrap task4; Task.unwrap task5; Task.unwrap task6; Task.unwrap task7; Task.unwrap task8; Task.unwrap task9; |]
         Task.waitAny(tasks, token)
-        
-    static member await<'T, 'U> (f:'T -> NTask<'U>) (p:'T) =
-        let task' = f(p)
-        Task.waitAll(task') |> ignore
-        task'.Result
-        
-    static member awaitv<'T, 'U> (f:'T -> VTask<'U>) (p:'T) =
-        let task' = f(p)
-        Task.waitAll(task') |> ignore
-        task'.Result
