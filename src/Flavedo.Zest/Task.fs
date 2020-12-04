@@ -9,19 +9,6 @@ type internal NTask = Task
 type internal VTask<'T> = ValueTask<'T>
 type internal VTask = ValueTask
 
-module ValueTask =
-    let private as_task (fn: 'T -> ValueTask<'U>) (x: 'T) =
-        let task = fn x
-        task.AsTask()
-
-    let await fn x =
-        let task = as_task fn x
-        Async.AwaitTask task
-
-module Task =
-    let await fn x =
-        Async.AwaitTask (fn x)
-
 [<AbstractClass; Sealed>]
 type Task private() =
     static member private as_task (value_task: ValueTask<'U>) =
